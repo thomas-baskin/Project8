@@ -33,7 +33,7 @@ X_test = scaler.transform(X_test)
 X_train
 
 #%%
-mlp = MLPClassifier(hidden_layer_sizes=(2),max_iter=5000)
+mlp = MLPClassifier(hidden_layer_sizes=(45,25,15,15,10,5),max_iter=5000)
 #mlp = MLPClassifier(hidden_layer_sizes=(10, 10, 10),max_iter=500)
 mlp.fit(X_train,y_train)
 predictions = mlp.predict(X_test)
