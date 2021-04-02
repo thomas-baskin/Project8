@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import classification_report,confusion_matrix
+from sklearn.model_selection import cross_validate 
 
 banks = pd.read_csv('data.csv')
 
@@ -32,7 +33,7 @@ X_test = scaler.transform(X_test)
 X_train
 
 #%%
-mlp = MLPClassifier(hidden_layer_sizes=(8,4,2),max_iter=5000)
+mlp = MLPClassifier(hidden_layer_sizes=(2),max_iter=5000)
 #mlp = MLPClassifier(hidden_layer_sizes=(10, 10, 10),max_iter=500)
 mlp.fit(X_train,y_train)
 predictions = mlp.predict(X_test)
@@ -53,6 +54,15 @@ print()
 print('There are {} 1D arrays of intercepts, one for each layer'.format(len(mlp.intercepts_)))
 print('Each layer has {} intercepts, one for each node'.format([len(mlp.intercepts_[l]) for l,_ in enumerate(mlp.intercepts_)]))
 
+#%%
+cv_results = cross_validate(mlp, X, y, cv=10
+# , 
+                            # return_train_score=True, 
+                            # scoring=mlp.score) 
+)
+print("Cross Validation: ")
+print("Fit scores: {}".format(cv_results['test_score']))
+#display(cv_results)
 #%%
 # you may need to install networkx with pip
 import networkx as nx
